@@ -7,10 +7,10 @@
 
 {% block body %}
 <div class="container"> 
-    <form>
+    <form action="/print-ac" id='size'>
         <div class="form-group">
-          <label for="inputid">Input Label</label>
-          <input type="inputtype" class="form-control" id="inputid">
+          <label for="size">Enter Size Here</label>
+          <input type="number" class="form-control" name="input-size" min="1">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
