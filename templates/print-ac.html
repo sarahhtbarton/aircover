@@ -6,9 +6,13 @@
 {% block head %}{% endblock %}
 
 {% block body %}
+
 <div class="container">
-    {{ size }}
+    {% for row in ac_list %}
+        <div style="white-space: pre;">{{ row }}</div> <!-- to preserve whitespace -->
+    {% endfor %}
 </div>
+
 {% endblock %}
 
 {% block after_body %}{% endblock %} 
