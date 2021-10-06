@@ -1,6 +1,7 @@
 """Server for Aircover Challenge."""
 
 from flask import Flask, render_template, request
+import math
 
 app = Flask(__name__)
 
@@ -15,10 +16,22 @@ def homepage():
 @app.route('/print-ac', methods=['GET'])
 def get_size():
 
-    size = request.args.get('input-size') #this is a dictionary. Must be args (not form) in a GET request
+    size = int(request.args.get('input-size')) #does request.args always return a string?
+    a_thickness = 'A' * math.ceil(size/4)
+    top_indentation = ' ' * (size + math.floor((size-1)/8) - 1)
+
+    ac_list = []
+
+    for i in range(size):
+        if i == 0: #top row
+            ac_list.append(top_indentation + a_thickness)
+        elif i == math.floor(size/2): #middle row
+            ac_list.append((' ' * (size - i - 1)) + a_thickness + ('A'*((i-1)*2)) + a_thickness)
+        else: #all other rows
+            ac_list.append((' ' * (size - i - 1)) + a_thickness + (' '*((i-1)*2)) + a_thickness)
 
     return render_template('print-ac.html',
-                           size=size)
+                           ac_list=ac_list)
 
 
 if __name__ == '__main__':
